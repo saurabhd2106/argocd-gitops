@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+  namespace: user-management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      volumes:
+        - name: ui-config
+          configMap:
+            name: frontend-configmap
+      containers:
+        - name: frontend-app
+          image: saurabhd2106/frontend-user-management:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: ui-config
+              mountPath: /usr/share/nginx/html/config.json
+              subPath: config.json
+              readOnly: true
