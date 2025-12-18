@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend-app
-          image: saurabhd2106/backend-user-management:latest
+          image: saurabhd2106/backend-user-management:2.0
           ports:
             - containerPort: 3000
           env:
